@@ -13,7 +13,7 @@ resource "aws_lb" "public" {
 
 resource "aws_lb" "private" {
   name               = "${var.ENV}-private-alb"
-  internal           = false //it means public load balancer
+  internal           = true  //if false it means public load balancer giving public ip adress.. so exclusively we should give it as ture so for private alb gives private ip.
   load_balancer_type = "application"
   security_groups    = [aws_security_group.private_lb.id]
   subnets            = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS
